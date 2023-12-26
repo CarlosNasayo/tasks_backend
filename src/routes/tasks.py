@@ -85,4 +85,4 @@ async def partial_update_task(task_id: str,status:bool):
         tast_patch.update(completed=status)
     else:
           raise HTTPException(status_code=404, detail=f"the task with  ID {task_id} doesn't exists")
-    return {'message': f'Task with ID {tast_patch.id} sucesfully updated', 'the current status is': status}
+    return {'message': f'Task with ID {tast_patch.id} sucesfully updatedd', 'the current status is': status}
