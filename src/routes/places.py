@@ -19,11 +19,14 @@ class Place(Document):
 
 
 @router.get("/get_place", summary="Get all places", response_model=List[PlaceOutput])
+@router.get("/get_place", summary="Get all places", response_model=List[PlaceOutput])
 async def get_places():
-    places_to_return = Place.objects()
-
-    return [{'id': str(place.id), 'title': place.name, 'description': place.description, 'completed': place.completed} for place in places_to_return]
-
+    try:
+        places_to_return = Place.objects()
+        result = [{'id': str(place.id), 'name': place.name, 'description': place.description, 'completed': place.completed} for place in places_to_return]
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error getting places: {str(e)}")
 @router.post("/create_places", summary="Create a new place", response_model=PlaceOutput)
 async def create_place(place_input: PlaceInput):
     existing_place = Place.objects(name=place_input.name).first()
