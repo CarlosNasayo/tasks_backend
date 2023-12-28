@@ -19,7 +19,6 @@ class Place(Document):
 
 
 @router.get("/get_place", summary="Get all places", response_model=List[PlaceOutput])
-@router.get("/get_place", summary="Get all places", response_model=List[PlaceOutput])
 async def get_places():
     try:
         places_to_return = Place.objects()
